@@ -1,19 +1,14 @@
-<div class="row">
-    <div class="span12">
-        <h1>Example view</h1>
-        <div class="row">
-            <div class="span4">
-                <h2>First column</h2>
-                <div>Name: <%= name %> </div>
-            </div>
-            <div class="span4">
-                <h2>Other column</h2>
-                <a href="#other">to other route/view</a>
-            </div>
-            <div class="span4">
-                <h2>Third column</h2>
-                <a href="#handlebars">Check out the handlebars page</a>
-            </div>
-        </div>
-    </div>
+<div class="view">
+	<% for (var i = 0, ilen = authors.length; i < ilen; i++) {
+		var author = authors[i]; %>
+		<div>
+			<span><%- author.id %></span>
+			<a href="/authors/<%= author.id %>"><%- author.name %></a>
+		</div>
+	<% } %>
+	<div>
+		<input id="identifier" placeholder="Enter unique id"></input>
+		<input id="author" placeholder="Enter Author name"></input>
+		<button class="add">Add</button>
+	</div>
 </div>

@@ -1,11 +1,28 @@
-
-  define(["app/module/views/skeletorView", "text!app/module/templates/exampleOtherTemplate.html"], function(SkeletorView, Template) {
-    return SkeletorView.extend({
-      template: _.template(Template),
-      el: "#other-view",
-      initialize: function() {
-        console.log('init other view');
-        return SkeletorView.prototype.initialize.call(this);
-      }
+define([
+    'underscore',
+    'backbone',
+    'text!templates/author.html'
+], function(_, Backbone, AuthorTemplate) {
+    var AuthorView = Backbone.View.extend({
+        el: '#container',
+        template: _.template(AuthorTemplate),
+        events: {
+            'click button.remove' : 'removeAuthor'
+        },
+        initialize: function() {
+            _.bindAll(this, 'render');
+            console.log('AuthorView Initialized!', this.model);
+        },
+        render: function() {
+            $(this.el).html(this.template(this.model.toJSON()));
+            return this;
+        },
+        removeAuthor: function() {
+            console.log('removeAuthor called in AuthorView');
+            this.model.destroy();
+            this.trigger('remove', this);
+        }
     });
-  });
+
+    return AuthorView;
+});
